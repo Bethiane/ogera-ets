@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Your Expenses - Ogera{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1 style="color: #2e7d32; font-size: 2rem;">
+            <i class="fas fa-receipt" style="margin-right: 10px; color: #2e7d32;"></i>Your Expenses
+        </h1>
+        <a href="{{ url_for('add_expense') }}" style="
+            padding: 0.7rem 1.2rem;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: #ffd700;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        ">
+            <i class="fas fa-plus" style="margin-right: 8px;"></i>Add New Expense
+        </a>
+    </div>
+
+    {% if expenses %}
+    <div style="overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); margin-bottom: 3rem;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white;">
+                <tr>
+                    <th style="padding: 1rem; text-align: right;">Amount (RWF)</th>
+                    <th style="padding: 1rem; text-align: left;">Category</th>
+                    <th style="padding: 1rem; text-align: left;">Description</th>
+                    <th style="padding: 1rem; text-align: left;">Date</th>
+                    <th style="padding: 1rem; text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 1rem; text-align: right; color: #2e7d32; font-weight: 600;">
+                         {{ "%0.2f"|format(expense[1]|float) }} RWF
+                    </td>
+                    <td style="padding: 1rem; color: #333;">{{ expense[2] }}</td>
+                    <td style="padding: 1rem; color: #666;">{{ expense[3] if expense[3] else '-' }}</td>
+                    <td style="padding: 1rem; color: #555;">{{ expense[4].strftime('%Y-%m-%d') if expense[4] else 'No date' }}</td>
+                    <td style="padding: 1rem; text-align: center;">
+                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                            <a href="{{ url_for('edit_expense', id=expense[0]) }}" style="
+                                padding: 0.5rem 1rem;
+                                background: #f8f9fa;
+                                color: #2e7d32;
+                                border: 1px solid #2e7d32;
+                                border-radius: 4px;
+                                font-size: 0.9rem;
+                                text-decoration: none;
+                                transition: all 0.3s;
+                            ">
+                                <i class="fas fa-edit" style="margin-right: 5px;"></i>Edit
+                            </a>
+                            <a href="{{ url_for('delete_expense', id=expense[0]) }}" style="
+                                padding: 0.5rem 1rem;
+                                background: #f8f9fa;
+                                color: #dc3545;
+                                border: 1px solid #dc3545;
+                                border-radius: 4px;
+                                font-size: 0.9rem;
+                                text-decoration: none;
+                                transition: all 0.3s;
+                            " onclick="return confirm('Are you sure you want to delete this expense?')">
+                                <i class="fas fa-trash-alt" style="margin-right: 5px;"></i>Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 3rem;
+    ">
+        <p style="color: #666; margin-bottom: 1rem;">
+            <i class="fas fa-inbox" style="font-size: 2rem; color: #ddd; margin-bottom: 1rem;"></i><br>
+            No expenses found.
+        </p>
+        <a href="{{ url_for('add_expense') }}" style="
+            padding: 0.7rem 1.2rem;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: #ffd700;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        ">
+            <i class="fas fa-plus" style="margin-right: 8px;"></i>Add Your First Expense
+        </a>
+    </div>
+    {% endif %}
+
+    {# Budget Summary Section #}
+    {% if current_budget is defined and current_budget is not none %}
+    <div style="
+        padding: 1.5rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    ">
+        <h2 style="color: #2e7d32; font-size: 1.5rem; margin-bottom: 1.5rem;">
+            <i class="fas fa-chart-pie" style="margin-right: 10px;"></i>Budget Status
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="
+                padding: 1rem;
+                background: #f8f9fa;
+                border-radius: 6px;
+                border-left: 4px solid #2e7d32;
+            ">
+                <div style="color: #666; font-size: 0.9rem;">Budget</div>
+                <div style="color: #2e7d32; font-weight: 600; font-size: 1.2rem;">
+                     {{ "%0.2f"|format(current_budget|float) }} RWF
+                </div>
+            </div>
+            
+            <div style="
+                padding: 1rem;
+                background: #f8f9fa;
+                border-radius: 6px;
+                border-left: 4px solid #6c757d;
+            ">
+                <div style="color: #666; font-size: 0.9rem;">Spent</div>
+                <div style="color: #333; font-weight: 600; font-size: 1.2rem;">
+                     {{ "%0.2f"|format(current_spending|float) }} RWF
+                </div>
+            </div>
+            
+            <div style="
+                padding: 1rem;
+                background: #f8f9fa;
+                border-radius: 6px;
+                border-left: 4px solid {% if (remaining|float) < 0 %}#dc3545{% else %}#28a745{% endif %};
+            ">
+                <div style="color: #666; font-size: 0.9rem;">Remaining</div>
+                <div style="color: {% if (remaining|float) < 0 %}#dc3545{% else %}#28a745{% endif %}; font-weight: 600; font-size: 1.2rem;">
+                     {{ "%0.2f"|format(remaining|float) }} RWF
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <div style="
+                height: 30px;
+                background: #e9ecef;
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+            ">
+                <div style="
+                    height: 100%;
+                    width: {{ ((percentage or 0)|float)|round(1) }}%;
+                    background: linear-gradient(90deg, 
+                        {% if (percentage or 0)|float > 80 %}#fd7e14{% else %}#28a745{% endif %}, 
+                        {% if (percentage or 0)|float > 80 %}#dc3545{% else %}#2e7d32{% endif %});
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    transition: width 0.5s ease;
+                ">
+                    {{ "%0.1f"|format((percentage or 0)|float) }}%
+                </div>
+            </div>
+        </div>
+        
+        {% if (remaining|float) < 0 %}
+            <div style="
+                padding: 1rem;
+                background: #f8d7da;
+                color: #721c24;
+                border-left: 4px solid #dc3545;
+                border-radius: 4px;
+                margin-top: 1rem;
+            ">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                You've exceeded your budget by  {{ "%0.2f"|format(-(remaining|float)) }} RWF!
+            </div>
+        {% elif percentage and (percentage|float) > 80 %}
+            <div style="
+                padding: 1rem;
+                background: #fff3cd;
+                color: #856404;
+                border-left: 4px solid #ffc107;
+                border-radius: 4px;
+                margin-top: 1rem;
+            ">
+                <i class="fas fa-exclamation-circle" style="margin-right: 8px;"></i>
+                You've used {{ "%0.1f"|format(percentage|float) }}% of your monthly budget
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
