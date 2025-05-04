@@ -3,8 +3,14 @@
 {% block title %}Register - Ogera Expense Management{% endblock %}
 
 {% block content %}
-<div style="display: flex; min-height: 70vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <div style="
+<style>
+    .register-container {
+        display: flex;
+        min-height: 70vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .welcome-section {
         flex: 1;
         padding: 3rem;
         color: white;
@@ -13,50 +19,51 @@
         flex-direction: column;
         justify-content: center;
         border-radius: 0 0 0 10px;
-    ">
-        <h1 style="
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            color: #ffd700;
-        ">Join Ogera Today</h1>
-        
-        <div style="
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        ">
-            <p style="
-                font-size: 1.1rem;
-                line-height: 1.7;
-                margin-bottom: 1rem;
-            ">Take the first step toward financial clarity with Ogera's powerful expense management platform. Our system transforms complex financial data into simple, actionable insights, helping you grow your savings as steadily as a thriving forest.</p>
-            
-            <p style="
-                font-size: 1.1rem;
-                line-height: 1.7;
-            ">By registering, you'll unlock tools that automatically categorize transactions, identify spending patterns, and provide personalized recommendations to optimize your budget. Join thousands who've already cultivated healthier financial habits with our ecosystem of money management tools.</p>
-        </div>
-        
-        <div style="
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            padding-left: 0.5rem;
-        ">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-seedling" style="font-size: 1.5rem; color: #ffd700;"></i>
-                <span style="font-size: 1rem;">Plant the seeds for financial growth</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-shield-alt" style="font-size: 1.5rem; color: #ffd700;"></i>
-                <span style="font-size: 1rem;">256-bit encryption protects your data</span>
-            </div>
-        </div>
-    </div>
+    }
 
-    <div style="
+    .welcome-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        color: #ffd700;
+    }
+
+    .welcome-description {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+
+    .description-text {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        color: #ffd700;
+    }
+
+    .feature-text {
+        font-size: 1rem;
+    }
+
+    .register-section {
         flex: 1;
         padding: 3rem;
         display: flex;
@@ -64,91 +71,114 @@
         justify-content: center;
         background: white;
         border-radius: 0 0 10px 0;
-    ">
-        <h2 style="
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #2e7d32;
-            text-align: center;
-        ">Create Your Account</h2>
-        <form method="POST" style="max-width: 400px; width: 100%; margin: 0 auto;">
-            <div style="margin-bottom: 1.5rem;">
-                <label for="username" style="
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: #555;
-                ">Username</label>
-                <input type="text" id="username" name="username" placeholder="Choose your username" required style="
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    transition: border-color 0.3s;
-                ">
+    }
+
+    .register-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #2e7d32;
+        text-align: center;
+    }
+
+    .register-form {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .register-btn {
+        width: 110%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+        color: #ffd700;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-link {
+        text-align: center;
+        color: #666;
+        font-size: 1rem;
+    }
+
+    .login-link a {
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<div class="register-container">
+    <div class="welcome-section">
+        <h1 class="welcome-title">Join Ogera Today</h1>
+        
+        <div class="welcome-description">
+            <p class="description-text">Take the first step toward financial clarity with Ogera's powerful expense management platform. Our system transforms complex financial data into simple, actionable insights, helping you grow your savings as steadily as a thriving forest.</p>
+            
+            <p class="description-text">By registering, you'll unlock tools that automatically categorize transactions, identify spending patterns, and provide personalized recommendations to optimize your budget. Join thousands who've already cultivated healthier financial habits with our ecosystem of money management tools.</p>
+        </div>
+        
+        <div class="features-list">
+            <div class="feature-item">
+                <i class="fas fa-seedling feature-icon"></i>
+                <span class="feature-text">Plant the seeds for financial growth</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <span class="feature-text">256-bit encryption protects your data</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="register-section">
+        <h2 class="register-title">Create Your Account</h2>
+        <form method="POST" class="register-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" placeholder="Choose your username" required class="form-input">
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-                <label for="email" style="
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: #555;
-                ">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your email address" required style="
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    transition: border-color 0.3s;
-                ">
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email address" required class="form-input">
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-                <label for="password" style="
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: #555;
-                ">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required style="
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    transition: border-color 0.3s;
-                ">
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a password" required class="form-input">
             </div>
 
-            <button type="submit" style="
-                width: 100%;
-                padding: 1rem;
-                background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-                color: #ffd700;
-                border: none;
-                border-radius: 6px;
-                font-size: 1rem;
-                font-weight: 600;
-                cursor: pointer;
-                transition: transform 0.2s, box-shadow 0.2s;
-                margin-bottom: 1.5rem;
-            ">
+            <button type="submit" class="register-btn">
                 Create Account
             </button>
 
-            <div style="
-                text-align: center;
-                color: #666;
-                font-size: 1rem;
-            ">
-                Already have an account? <a href="{{ url_for('login') }}" style="
-                    color: #2e7d32;
-                    text-decoration: none;
-                    font-weight: 600;
-                ">Sign In</a>
+            <div class="login-link">
+                Already have an account? <a href="{{ url_for('login') }}">Sign In</a>
             </div>
         </form>
     </div>

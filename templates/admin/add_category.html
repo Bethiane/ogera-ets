@@ -3,91 +3,129 @@
 {% block title %}Add Category - Ogera{% endblock %}
 
 {% block content %}
-<div style="
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-">
-    <h1 style="
+<style>
+    .category-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-title {
         color: #2e7d32;
         text-align: center;
         margin-bottom: 1.5rem;
         font-size: 2rem;
-    ">
-        <i class="fas fa-tag" style="margin-right: 10px;"></i>Add New Category
+    }
+
+    .category-title i {
+        margin-right: 10px;
+    }
+
+    .category-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #555;
+        font-size: 1rem;
+    }
+
+    .form-input {
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .form-textarea {
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        min-height: 100px;
+        resize: vertical;
+        transition: border-color 0.3s;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .submit-btn {
+        flex: 1;
+        padding: 0.8rem;
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+        color: #ffd700;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .submit-btn i {
+        margin-right: 8px;
+    }
+
+    .cancel-btn {
+        flex: 1;
+        padding: 0.8rem;
+        background: white;
+        color: #2e7d32;
+        border: 1px solid #2e7d32;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+</style>
+
+<div class="category-container">
+    <h1 class="category-title">
+        <i class="fas fa-tag"></i>Add New Category
     </h1>
 
-    <form method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <label style="
-                font-weight: 600;
-                color: #555;
-                font-size: 1rem;
-            ">
+    <form method="POST" class="category-form">
+        <div class="form-group">
+            <label class="form-label">
                 Category Name
             </label>
-            <input type="text" name="name" required style="
-                padding: 0.8rem 1rem;
-                border: 1px solid #ddd;
-                border-radius: 6px;
-                font-size: 1rem;
-                transition: border-color 0.3s;
-            ">
+            <input type="text" name="name" required class="form-input">
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <label style="
-                font-weight: 600;
-                color: #555;
-                font-size: 1rem;
-            ">
+        <div class="form-group">
+            <label class="form-label">
                 Description
             </label>
-            <textarea name="description" style="
-                padding: 0.8rem 1rem;
-                border: 1px solid #ddd;
-                border-radius: 6px;
-                font-size: 1rem;
-                min-height: 100px;
-                resize: vertical;
-                transition: border-color 0.3s;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            "></textarea>
+            <textarea name="description" class="form-textarea"></textarea>
         </div>
 
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <button type="submit" style="
-                flex: 1;
-                padding: 0.8rem;
-                background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-                color: #ffd700;
-                border: none;
-                border-radius: 6px;
-                font-size: 1rem;
-                font-weight: 600;
-                cursor: pointer;
-                transition: transform 0.2s;
-            ">
-                <i class="fas fa-plus" style="margin-right: 8px;"></i>Add Category
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-plus"></i>Add Category
             </button>
 
-            <a href="{{ url_for('manage_categories') }}" style="
-                flex: 1;
-                padding: 0.8rem;
-                background: white;
-                color: #2e7d32;
-                border: 1px solid #2e7d32;
-                border-radius: 6px;
-                font-size: 1rem;
-                font-weight: 600;
-                cursor: pointer;
-                text-align: center;
-                text-decoration: none;
-                transition: all 0.3s;
-            ">
+            <a href="{{ url_for('manage_categories') }}" class="cancel-btn">
                 Cancel
             </a>
         </div>

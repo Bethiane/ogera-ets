@@ -3,8 +3,14 @@
 {% block title %}Login - Ogera Expense Management{% endblock %}
 
 {% block content %}
-<div style="display: flex; min-height: 80vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <div style="
+<style>
+    .login-container {
+        display: flex;
+        min-height: 80vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .welcome-section {
         flex: 1;
         padding: 3rem;
         color: white;
@@ -13,50 +19,51 @@
         flex-direction: column;
         justify-content: center;
         border-radius: 0 0 0 10px;
-    ">
-        <h1 style="
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            color: #ffd700;
-        ">Welcome to Ogera</h1>
-        
-        <div style="
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        ">
-            <p style="
-                font-size: 1.1rem;
-                line-height: 1.7;
-                margin-bottom: 1rem;
-            ">Ogera is your smart expense management companion, designed to simplify financial tracking with intuitive categorization and real-time insights. Effortlessly monitor your spending, analyze trends, and take control of your budget—all in one place.</p>
-            
-            <p style="
-                font-size: 1.1rem;
-                line-height: 1.7;
-            ">Whether for personal finance or business expenses, Ogera helps you make smarter decisions with clear, actionable data through our nature-inspired interface that promotes financial growth and stability.</p>
-        </div>
-        
-        <div style="
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            padding-left: 0.5rem;
-        ">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-leaf" style="font-size: 1.5rem; color: #ffd700;"></i>
-                <span style="font-size: 1rem;">Green-inspired financial management</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-lock" style="font-size: 1.5rem; color: #ffd700;"></i>
-                <span style="font-size: 1rem;">Bank-level security for your data</span>
-            </div>
-        </div>
-    </div>
+    }
 
-    <div style="
+    .welcome-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        color: #ffd700;
+    }
+
+    .welcome-description {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+
+    .description-text {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        color: #ffd700;
+    }
+
+    .feature-text {
+        font-size: 1rem;
+    }
+
+    .login-section {
         flex: 1;
         padding: 3rem;
         display: flex;
@@ -64,74 +71,113 @@
         justify-content: center;
         background: white;
         border-radius: 0 0 10px 0;
-    ">
-        <h2 style="
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #2e7d32;
-            text-align: center;
-        ">Login to Your Account</h2>
-        <form method="POST" style="max-width: 400px; width: 100%; margin: 0 auto;">
-            <div style="margin-bottom: 1.5rem;">
-                <label for="username" style="
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: #555;
-                ">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required style="
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    transition: border-color 0.3s;
-                ">
+    }
+
+    .login-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #2e7d32;
+        text-align: center;
+    }
+
+    .login-form {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .login-btn {
+        width: 110%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+        color: #ffd700;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-btn i {
+        margin-right: 8px;
+    }
+
+    .register-link {
+        text-align: center;
+        color: #666;
+        font-size: 1rem;
+    }
+
+    .register-link a {
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<div class="login-container">
+    <div class="welcome-section">
+        <h1 class="welcome-title">Welcome to Ogera</h1>
+        
+        <div class="welcome-description">
+            <p class="description-text">Ogera is your smart expense management companion, designed to simplify financial tracking with intuitive categorization and real-time insights. Effortlessly monitor your spending, analyze trends, and take control of your budget—all in one place.</p>
+            
+            <p class="description-text">Whether for personal finance or business expenses, Ogera helps you make smarter decisions with clear, actionable data through our nature-inspired interface that promotes financial growth and stability.</p>
+        </div>
+        
+        <div class="features-list">
+            <div class="feature-item">
+                <i class="fas fa-leaf feature-icon"></i>
+                <span class="feature-text">Green-inspired financial management</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-lock feature-icon"></i>
+                <span class="feature-text">Bank-level security for your data</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-section">
+        <h2 class="login-title">Login to Your Account</h2>
+        <form method="POST" class="login-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required class="form-input">
             </div>
             
-            <div style="margin-bottom: 1.5rem;">
-                <label for="password" style="
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: #555;
-                ">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required style="
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    transition: border-color 0.3s;
-                ">
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required class="form-input">
             </div>
             
-            <button type="submit" style="
-                width: 100%;
-                padding: 1rem;
-                background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-                color: #ffd700;
-                border: none;
-                border-radius: 6px;
-                font-size: 1rem;
-                font-weight: 600;
-                cursor: pointer;
-                transition: transform 0.2s, box-shadow 0.2s;
-                margin-bottom: 1.5rem;
-            ">
+            <button type="submit" class="login-btn">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
             
-            <div style="
-                text-align: center;
-                color: #666;
-                font-size: 1rem;
-            ">
-                Don't have an account? <a href="{{ url_for('register') }}" style="
-                    color: #2e7d32;
-                    text-decoration: none;
-                    font-weight: 600;
-                ">Create one</a>
+            <div class="register-link">
+                Don't have an account? <a href="{{ url_for('register') }}">Create one</a>
             </div>
         </form>
     </div>

@@ -3,58 +3,179 @@
 {% block title %}Admin Dashboard - Ogera{% endblock %}
 
 {% block content %}
-<div style="max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem;">
-    <h1 style="color: #2e7d32; font-size: 2.2rem; margin-bottom: 2rem;">
-        <i class="fas fa-tachometer-alt" style="margin-right: 12px; color: #2e7d32;"></i>Admin Dashboard
+<style>
+    .admin-container {
+        max-width: 1400px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .admin-title {
+        color: #2e7d32;
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .admin-title i {
+        margin-right: 12px;
+        color: #2e7d32;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        color: #2e7d32;
+        font-size: 1.6rem;
+    }
+
+    .section-title i {
+        margin-right: 10px;
+    }
+
+    .section-count {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .data-table-container {
+        overflow-x: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-header {
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+        color: white;
+    }
+
+    .table-header th {
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .table-row {
+        border-bottom: 1px solid #eee;
+    }
+
+    .table-data {
+        padding: 1rem;
+    }
+
+    .id-data {
+        color: #555;
+    }
+
+    .username-data {
+        color: #333;
+        font-weight: 500;
+    }
+
+    .email-data {
+        color: #666;
+    }
+
+    .amount-data {
+        color: #2e7d32;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .category-data {
+        color: #333;
+    }
+
+    .description-data {
+        color: #666;
+    }
+
+    .date-data {
+        color: #555;
+    }
+
+    .admin-badge {
+        color: #2e7d32;
+        font-weight: 600;
+    }
+
+    .non-admin-badge {
+        color: #666;
+    }
+
+    .actions-cell {
+        text-align: center;
+    }
+
+    .delete-btn {
+        padding: 0.5rem 1rem;
+        background: #f8f9fa;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .delete-btn i {
+        margin-right: 5px;
+    }
+</style>
+
+<div class="admin-container">
+    <h1 class="admin-title">
+        <i class="fas fa-tachometer-alt"></i>Admin Dashboard
     </h1>
-    
+
     <!-- Users Section -->
-    <div style="margin-bottom: 3rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h2 style="color: #2e7d32; font-size: 1.6rem;">
-                <i class="fas fa-users" style="margin-right: 10px;"></i>Users
+    <div class="users-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>Users
             </h2>
-            <div style="color: #666; font-size: 0.9rem;">
+            <div class="section-count">
                 Total Users: {{ users|length }}
             </div>
         </div>
-        
-        <div style="overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white;">
+
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead class="table-header">
                     <tr>
-                        <th style="padding: 1rem; text-align: left;">ID</th>
-                        <th style="padding: 1rem; text-align: left;">Username</th>
-                        <th style="padding: 1rem; text-align: left;">Email</th>
-                        <th style="padding: 1rem; text-align: center;">Admin</th>
-                        <th style="padding: 1rem; text-align: center;">Actions</th>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th class="actions-cell">Admin</th>
+                        <th class="actions-cell">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in users %}
-                    <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 1rem; color: #555;">{{ user[0] }}</td>
-                        <td style="padding: 1rem; color: #333; font-weight: 500;">{{ user[1] }}</td>
-                        <td style="padding: 1rem; color: #666;">{{ user[2] }}</td>
-                        <td style="padding: 1rem; text-align: center;">
+                    <tr class="table-row">
+                        <td class="table-data id-data">{{ user[0] }}</td>
+                        <td class="table-data username-data">{{ user[1] }}</td>
+                        <td class="table-data email-data">{{ user[2] }}</td>
+                        <td class="table-data actions-cell">
                             {% if user[3] %}
-                                <span style="color: #2e7d32; font-weight: 600;">Yes</span>
+                            <span class="admin-badge">Yes</span>
                             {% else %}
-                                <span style="color: #666;">No</span>
+                            <span class="non-admin-badge">No</span>
                             {% endif %}
                         </td>
-                        <td style="padding: 1rem; text-align: center;">
-                            <a href="{{ url_for('admin_delete_user', id=user[0]) }}" style="
-                                padding: 0.5rem 1rem;
-                                background: #f8f9fa;
-                                color: #dc3545;
-                                border: 1px solid #dc3545;
-                                border-radius: 4px;
-                                font-size: 0.9rem;
-                                text-decoration: none;
-                                transition: all 0.3s;
-                            ">
-                                <i class="fas fa-trash-alt" style="margin-right: 5px;"></i>Delete
+                        <td class="table-data actions-cell">
+                            <a href="{{ url_for('admin_delete_user', id=user[0]) }}" class="delete-btn">
+                                <i class="fas fa-trash-alt"></i>Delete
                             </a>
                         </td>
                     </tr>
@@ -65,50 +186,41 @@
     </div>
 
     <!-- Expenses Section -->
-    <div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h2 style="color: #2e7d32; font-size: 1.6rem;">
-                <i class="fas fa-receipt" style="margin-right: 10px;"></i>All Expenses
+    <div class="expenses-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-receipt"></i>All Expenses
             </h2>
-            <div style="color: #666; font-size: 0.9rem;">
+            <div class="section-count">
                 Total Expenses: {{ expenses|length }}
             </div>
         </div>
-        
-        <div style="overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white;">
+
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead class="table-header">
                     <tr>
-                        <th style="padding: 1rem; text-align: left;">ID</th>
-                        <th style="padding: 1rem; text-align: right;">Amount</th>
-                        <th style="padding: 1rem; text-align: left;">Category</th>
-                        <th style="padding: 1rem; text-align: left;">Description</th>
-                        <th style="padding: 1rem; text-align: left;">Date</th>
-                        <th style="padding: 1rem; text-align: left;">User</th>
-                        <th style="padding: 1rem; text-align: center;">Actions</th>
+                        <th>ID</th>
+                        <th style="text-align: right;">Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th class="actions-cell">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for expense in expenses %}
-                    <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 1rem; color: #555;">{{ expense[0] }}</td>
-                        <td style="padding: 1rem; color: #2e7d32; font-weight: 600; text-align: right;">{{ expense[1] }} RWF</td>
-                        <td style="padding: 1rem; color: #333;">{{ expense[2] }}</td>
-                        <td style="padding: 1rem; color: #666;">{{ expense[3] }}</td>
-                        <td style="padding: 1rem; color: #555;">{{ expense[4] }}</td>
-                        <td style="padding: 1rem; color: #333; font-weight: 500;">{{ expense[5] }}</td>
-                        <td style="padding: 1rem; text-align: center;">
-                            <a href="{{ url_for('admin_delete_expense', id=expense[0]) }}" style="
-                                padding: 0.5rem 1rem;
-                                background: #f8f9fa;
-                                color: #dc3545;
-                                border: 1px solid #dc3545;
-                                border-radius: 4px;
-                                font-size: 0.9rem;
-                                text-decoration: none;
-                                transition: all 0.3s;
-                            ">
-                                <i class="fas fa-trash-alt" style="margin-right: 5px;"></i>Delete
+                    <tr class="table-row">
+                        <td class="table-data id-data">{{ expense[0] }}</td>
+                        <td class="table-data amount-data">{{ expense[1] }} RWF</td>
+                        <td class="table-data category-data">{{ expense[2] }}</td>
+                        <td class="table-data description-data">{{ expense[3] }}</td>
+                        <td class="table-data date-data">{{ expense[4] }}</td>
+                        <td class="table-data username-data">{{ expense[5] }}</td>
+                        <td class="table-data actions-cell">
+                            <a href="{{ url_for('admin_delete_expense', id=expense[0]) }}" class="delete-btn">
+                                <i class="fas fa-trash-alt"></i>Delete
                             </a>
                         </td>
                     </tr>
